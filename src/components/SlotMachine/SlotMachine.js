@@ -102,7 +102,7 @@ export default function SlotMachine() {
       </div>
 
       <footer className="footer">
-        <a href="https://github.com/davi-94" className="link" target="_blank" rel="noreferrer noopener">
+        <a href="https://github.com/davi-94/slotmachine" className="link" target="_blank" rel="noreferrer noopener">
           Github Repository{' '}
           <i className="fa fa-github" aria-hidden="true" />
         </a>
