@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import uniq from 'lodash/uniq';
 import Spinner from "../Spinner";
-import Sound from "../Sound/Sound";
+import Sound from "../Sound";
 import Button from "../Button";
 
 export default function SlotMachine() {
