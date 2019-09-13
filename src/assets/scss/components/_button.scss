@@ -1,0 +1,48 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+.btn {
+  display: inline-block;
+  position: relative;
+  margin-right: 15px;
+  padding: .5rem 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .15s ease-in-out;
+
+  &-start {
+    color: #4CAF50;
+    border-color: #4CAF50;
+    &:hover,
+    &:focus,
+    &:visited {
+      color: #FFFFFF;
+      background-color: #4CAF50;
+      outline: none;
+    }
+  }
+
+  &-stop {
+    color: #000000;
+    border-color: #e7e7e7;
+    &:hover,
+    &:focus,
+    &:visited {
+      background-color: #e7e7e7;
+      outline: none;
+    }
+  }
+
+  &:disabled {
+    color: rgba(31,45,48,.2);
+    background-color: rgba(31,45,48,.1);
+    border-color: rgba(31,45,48,.2);
+    cursor: auto;
+  }
+}

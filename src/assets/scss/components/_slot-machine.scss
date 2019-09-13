@@ -1,0 +1,24 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+.slot-machine {
+  position: absolute;
+  display: block;
+  width: 600px;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.prize {
+  display: block;
+  position: relative;
+  height: 50px;
+  margin-top: 1.5rem;
+
+  p {
+    font-size: 1.5rem;
+  }
+}

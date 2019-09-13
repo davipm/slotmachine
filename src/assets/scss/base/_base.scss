@@ -1,0 +1,54 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  text-align: left;
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1.5;
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+.slot-machine-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
+
+img {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  border: none;
+  width: 150px;
+  margin-right: 25px;
+  margin-bottom: 2rem;
+}
+
+.link {
+  display: inline-block;
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #564d80;
+  text-decoration: none;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
