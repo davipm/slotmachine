@@ -1,8 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import uniq from 'lodash/uniq';
+import React, { useState, useEffect } from 'react';
+
 import Spinner from "../Spinner";
 import Sound from "../Sound";
 import Button from "../Button";
+
+const MAX_PRIZE = 100;
+const CONSEC_PRIZE = 20;
+const NON_CONSEC_PRIZE = 10;
 
 export default function SlotMachine() {
   const [isRunning, setIsRunning] = useState(false);
@@ -10,13 +14,9 @@ export default function SlotMachine() {
   const [lose, setLose] = useState(false);
   const [prize, setPrize] = useState(0);
 
-  const MAX_PRIZE = 100;
-  const CONSEC_PRIZE = 20;
-  const NON_CONSEC_PRIZE = 10;
-
   useEffect(() => {
     const start = setTimeout(() => {
-      handleStart();
+      handleStart()
     }, 5000);
 
     return () => clearTimeout(start);
@@ -24,6 +24,7 @@ export default function SlotMachine() {
 
   useEffect(() => {
     let stop;
+
     if (isRunning) {
       stop = setTimeout(() => {
         handleStop()
@@ -33,36 +34,30 @@ export default function SlotMachine() {
     return () => clearTimeout(stop);
   }, [isRunning]);
 
-  const handleStart = () => {
+  function handleStart() {
     setIsRunning(true);
     setWinner(false);
     setPrize(0);
-  };
+  }
 
   const handleStop = () => setIsRunning(false);
 
   const handleResult = wheels => {
     const images = wheels.map(wheel => wheel.split('/').pop());
-    const result = uniq(images);
+    const result = [...new Set(images)];
+    console.log(result)
 
-    // if loose.
     if (result.length === 3) {
       setWinner(false);
       setLose(true);
       setPrize(0);
       return;
-    }
-
-    // win max prize.
-    if (result.length === 1) {
+    } else if (result.length === 1) {
       setWinner(true);
       setLose(false);
       setPrize(MAX_PRIZE);
       return;
-    }
-
-    // two consecutive symbols.
-    if (images[0] === images[1] || images[1] === images[2]) {
+    } else if (images[0] === images[1] || images[1] === images[2]) {
       setWinner(true);
       setLose(false);
       setPrize(CONSEC_PRIZE);

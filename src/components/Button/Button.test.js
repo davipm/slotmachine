@@ -22,6 +22,6 @@ it('should render children correctly',  () => {
   const stopHandler = jest.fn();
   act(() => {
     render(<Button handleClick={stopHandler} variant="start">Start</Button>, container);
-  });
-  expect(container.classContent).toBe('Start')
+  })
+  expect(container.textContent).toBe('Start')
 });

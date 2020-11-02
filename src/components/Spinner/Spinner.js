@@ -1,76 +1,61 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import monkey from '../../assets/images/monkey.png';
 import orange from '../../assets/images/orange.png';
 import banana from '../../assets/images/banana.png';
 import strawberry from '../../assets/images/strawberry.png';
 
-export default class Spinner extends Component {
-  static propTypes = {
-    spin: PropTypes.bool.isRequired,
-    onStop: PropTypes.func.isRequired
-  };
+Spinner.propTypes = {
+  spin: PropTypes.bool.isRequired,
+  onStop: PropTypes.func.isRequired
+};
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      spinning: false,
-      wheels: [],
-    };
-  }
+export default function Spinner({ onStop, spin }) {
+  const [spinning, setSpinning] = useState(false);
+  const [wheels, setWheels] = useState([]);
+  const [prevSpin, setPrevSpin] = useState(null);
 
-  images = [
+  let images = [
     monkey,
     orange,
     banana,
     strawberry
   ];
 
-  componentDidMount() {
-    this.setState({
-      wheels: [ this.randomImage(), this.randomImage(), this.randomImage()]}
-    )
+  useEffect(() => {
+    setWheels([randomImage(), randomImage(), randomImage()])
+  }, []);
+
+  useEffect(() => {
+    let timer;
+
+    if (spinning) timer = setInterval(() => setSpin(), 50)
+    if (!spinning) onStop(wheels)
+
+    return () => clearInterval(timer)
+  }, [spinning]);
+
+  if (spin !== prevSpin) {
+    setSpinning(prevSpin !== null && spin > prevSpin)
+    setPrevSpin(spin)
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { onStop } = this.props;
-    const { spinning, wheels} = this.state;
-
-    if (spinning && (spinning !== prevState.spinning)) {
-      this.tick()
-    }
-    if (!spinning && (spinning !== prevState.spinning)) {
-      clearInterval(this.isSpinning);
-      onStop(wheels)
-    }
+  function randomImage() {
+    return images[Math.floor((Math.random() * images.length))]
   }
 
-  static getDerivedStateFromProps(props) {
-    return { spinning: props.spin }
+  function setSpin() {
+    setWheels([randomImage(), randomImage(), randomImage()])
   }
 
-  randomImage = () => this.images[Math.floor((Math.random() * this.images.length))];
-
-  spin = () => this.setState({
-    wheels: [this.randomImage(), this.randomImage(), this.randomImage()]
-  });
-
-  tick = () => this.isSpinning = setInterval(this.spin, 50);
-
-  render() {
-    const { wheels } = this.state;
-    return (
-      <>
-        {wheels.map((wheel, index) => (
-          <img
-            src={wheel}
-            key={index}
-            alt="Spinner Item"
-            title="Spinner Item"
-            className="spinner-img"
-          />
-        ))}
-      </>
-    )
-  }
+  return wheels.map((wheel, index) => (
+    <img
+      src={wheel}
+      key={index}
+      alt="Spinner Item"
+      title="Spinner Item"
+      className="spinner-img"
+    />
+  ))
 }

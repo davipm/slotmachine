@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+Button.prototype = {
+  children: PropTypes.any.isRequired,
+  handleClick: PropTypes.func,
+  variant: PropTypes.string,
+};
+
 export default function Button({children, handleClick, variant, disabled}) {
   let className = [
     'btn ',
@@ -9,20 +15,12 @@ export default function Button({children, handleClick, variant, disabled}) {
   ];
 
   return(
-    <>
-      <button
-        onClick={handleClick}
-        disabled={disabled}
-        className={className.join('').trim()}
-      >
-        {children}
-      </button>
-    </>
+    <button
+      onClick={handleClick}
+      disabled={disabled}
+      className={className.join('').trim()}
+    >
+      {children}
+    </button>
   )
 }
-
-Button.prototype = {
-  children: PropTypes.any.isRequired,
-  handleClick: PropTypes.func,
-  variant: PropTypes.string,
-};

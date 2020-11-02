@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import win from '../../assets/sound/win.wav';
 import fail from '../../assets/sound/fail.wav';
 import coin from '../../assets/sound/coin.wav';
