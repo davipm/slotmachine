@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 import Spinner from "../Spinner";
 import Sound from "../Sound";
@@ -16,22 +16,20 @@ export default function SlotMachine() {
 
   useEffect(() => {
     const start = setTimeout(() => {
-      handleStart()
+      handleStart();
     }, 5000);
 
     return () => clearTimeout(start);
   }, []);
 
   useEffect(() => {
-    let stop;
-
     if (isRunning) {
-      stop = setTimeout(() => {
-        handleStop()
-      },10000);
-    }
+      const stop = setTimeout(() => {
+        handleStop();
+      }, 10000);
 
-    return () => clearTimeout(stop);
+      return () => clearTimeout(stop);
+    }
   }, [isRunning]);
 
   function handleStart() {
@@ -42,10 +40,9 @@ export default function SlotMachine() {
 
   const handleStop = () => setIsRunning(false);
 
-  const handleResult = wheels => {
-    const images = wheels.map(wheel => wheel.split('/').pop());
+  const handleResult = (wheels) => {
+    const images = wheels.map((wheel) => wheel.split("/").pop());
     const result = [...new Set(images)];
-    console.log(result)
 
     if (result.length === 3) {
       setWinner(false);
@@ -73,36 +70,40 @@ export default function SlotMachine() {
     <div className="slot-machine">
       <h1 className="slot-machine-title">React Slot Machine Game</h1>
 
-      <Spinner
-        spin={isRunning}
-        onStop={handleResult}
-      />
+      <Spinner spin={isRunning} onStop={handleResult} />
 
       <div className="btn-group">
-        <Button handleClick={handleStart} variant="start">Start</Button>
-        <Button handleClick={handleStop} variant="stop" disabled={!isRunning}>Stop</Button>
+        <Button handleClick={handleStart} variant="start">
+          Start
+        </Button>
+        <Button handleClick={handleStop} variant="stop" disabled={!isRunning}>
+          Stop
+        </Button>
       </div>
 
       <div className="prize">
-        {winner && <p>You win! Your prize: ${prize}.00</p> }
+        {winner && <p>You win! Your prize: ${prize}.00</p>}
 
-        {(winner && prize === MAX_PRIZE) && <Sound audio="win" /> }
+        {winner && prize === MAX_PRIZE && <Sound audio="win" />}
 
-        {lose &&
+        {lose && (
           <>
             <p>You lose</p>
             <Sound audio="fail" />
           </>
-        }
+        )}
       </div>
 
       <footer className="footer">
-        <a href="https://github.com/davi-94/slotmachine" className="link" target="_blank" rel="noreferrer noopener">
-          Github Repository{' '}
-          <i className="fa fa-github" aria-hidden="true" />
+        <a
+          href="https://github.com/davi-94/slotmachine"
+          className="link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Github Repository <i className="fa fa-github" aria-hidden="true" />
         </a>
       </footer>
     </div>
-  )
+  );
 }
-
